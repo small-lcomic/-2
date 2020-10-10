@@ -24,20 +24,20 @@ function getUserInfo() {
         url:'/my/userinfo',
         type:'get',
         //配置请求头信息
-        headers: {
+    /*     headers: {
             //重新登录,因为token过期事件12小时
             Authorization:localStorage.getItem("token") || ""
-        },
+        }, */
         success: function(res){
             if (res.status !== 0) {
-                return layui, layer.msg(res.message);
+                return layui.layer.msg(res.message);
             }
             console.log(res);
             //请求 成功  渲染用户头像信息
             renderAvatar(res.data)
         },
         //无论成功或者失败,都会触发complete方法
-        complete: function (res) {
+     /*    complete: function (res) {
             console.log(res);
             //判断,如果身份认证失败,跳转回登录页面
             if (res.responseJSON.status === 1 && res.responseJSON.message === "身份认证失败！") {
@@ -46,7 +46,7 @@ function getUserInfo() {
                 //2.页面跳转
                 location.href = '/login.html';
             }
-        }
+        } */
     });
 }
 
@@ -60,7 +60,7 @@ function renderAvatar(user) {
 
     if (user.user_pic !== null) {
         //有头像
-        $('.layui-nav-img').atter('src', user.user_pic).show()
+        $('.layui-nav-img').attr('src', user.user_pic).show()
         $('.user-avatar').hide();
     } else {
         //没有头像
